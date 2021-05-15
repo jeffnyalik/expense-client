@@ -1,0 +1,109 @@
+<app-nav-bar></app-nav-bar>
+<div class="container-fluid">
+    <div class="row">
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                </ol>
+            </nav>
+
+            <h2 class="h2" style="font-family: 'Times New Roman', Times, serif;">Expenditure</h2>
+            <button class="btn btn-info rounded-0" style="float:right;margin-top:-45px;">
+                <span><i class="fa fa-plus"></i></span>
+                Add Expense
+            </button>
+            <hr>
+            <p>Welcome to your Income and Expenditure overview for (Daily, Monthly and Annual).</p>
+            <div class="row my-4" *ngIf="expenses">
+                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0" *ngFor="let expense of expenses">
+                    <div class="card" style="font-family:'Times New Roman', Times, serif">
+                        <h5 class="card-header ">{{expense.category | titlecase}}</h5>
+                        <div class="card-body ">
+                            <h5 class="card-title ">Ksh: {{expense.amount | currency: 'Kshs'}}</h5>
+                            <p class="card-text ">Date: {{expense.date | date}}</p>
+                            <p class="card-text text-success ">
+                                {{expense.description}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 ">
+                    <div class="card ">
+                        <h5 class="card-header ">Revenue</h5>
+                        <div class="card-body ">
+                            <h5 class="card-title ">$2.4k</h5>
+                            <p class="card-text ">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-success ">4.6% increase since last month</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 ">
+                    <div class="card ">
+                        <h5 class="card-header ">Purchases</h5>
+                        <div class="card-body ">
+                            <h5 class="card-title ">43</h5>
+                            <p class="card-text ">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-danger ">2.6% decrease since last month</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 ">
+                    <div class="card ">
+                        <h5 class="card-header ">Traffic</h5>
+                        <div class="card-body ">
+                            <h5 class="card-title ">64k</h5>
+                            <p class="card-text ">Feb 1 - Apr 1, United States</p>
+                            <p class="card-text text-success ">2.5% increase since last month</p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="row ">
+                <div class="col-12 col-xl-8 mb-4 mb-lg-0 ">
+                    <div class="card ">
+                        <h5 class="card-header ">Latest Expenditure</h5>
+                        <div class="card-body ">
+                            <div class="table-responsive ">
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col ">ID</th>
+                                            <th scope="col ">Category</th>
+                                            <th scope="col ">Amount</th>
+                                            <th scope="col ">Date</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of expenses">
+                                            <th scope="row">{{item.id}}</th>
+                                            <td>{{item.category | titlecase}}</td>
+                                            <td>{{item.amount | currency: 'Ksh'}}</td>
+                                            <td>{{item.date | date}}</td>
+                                            <!-- <td><a href="# " class="btn btn-sm btn-primary ">View</a></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- <a href="" class="btn btn-block btn-light">View all</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4 ">
+                    <div class="card ">
+                        <h5 class="card-header ">Traffic last 6 months</h5>
+                        <div class="card-body ">
+                            <div id="traffic-chart "></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <app-footer></app-footer>
+        </main>
+    </div>
+</div>

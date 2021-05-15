@@ -1,0 +1,66 @@
+<div class="section">
+    <div class="container">
+        <form [formGroup]="form" autocomplete="off" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" formControlName="username" placeholder="Enter Username">
+                        <label *ngIf="f.username.touched && f.username.invalid" class="text-danger">
+                            <span *ngIf="f.username.errors">Username must be atleast 6 characters.</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="username">Email Address</label>
+                        <input type="text" class="form-control" formControlName="email" placeholder="Email address">
+                        <label *ngIf="f.email.touched && f.email.invalid" class="text-danger">
+                            <span *ngIf="f.email.errors">Email is required.</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="username">Password</label>
+                        <input type="password" class="form-control" formControlName="password" placeholder="Enter password">
+                        <div *ngIf="f.password.touched && f.password.invalid ">
+                            <label *ngIf=" f.password.errors" class="text-danger">Password must be atleast 6 characters.</label>
+                            <label *ngIf="f.password.errors && !f.password.errors" class="text-warning">
+                                Password should contain atleast 6 characters
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="username">Confirm Password</label>
+                        <input type="password" class="form-control" formControlName="password_confirm" placeholder="confirm_password">
+                    </div>
+                    <div *ngIf="f.password_confirm.touched && f.password_confirm.invalid" class="text-danger">
+                        <div *ngIf="f.password_confirm.errors">Password must match.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <button class="btn btn-primary" [disabled]="!form.valid">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> SIGN UP
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <span class="text-danger" *ngIf="userTakenError">
+                    {{userTakenError.error.error.username}}
+                </span>
+            </div>
+            <div class="col-md-6">
+                <span class="text-danger" *ngIf="emailTakenError">
+                    {{userTakenError.error.error.email}}
+                </span>
+            </div>
+        </form>
+    </div>
+</div>

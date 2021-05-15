@@ -1,0 +1,46 @@
+<div class="section">
+    <div class="container">
+        <form (ngSubmit)="login()" [formGroup]="form">
+            <span class="text-success" *ngIf="loginSucess">Loggedin Successfully</span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Email">Email Address</label>
+                        <input type="text" formControlName="email" class="form-control" placeholder="Email Address">
+                        <label *ngIf="f.email.touched && f.email.invalid" class="text-danger">
+                            <span *ngIf="f.email.errors">Email is required and must be <br> atleast 6 characters</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" formControlName="password" class="form-control" placeholder="Enter password">
+                        <label *ngIf="f.password.touched && f.password.invalid" class="text-danger">
+                            <span *ngIf="f.password.errors">Password is required & <br> must be atleast 6 characters</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button [disabled]="!form.valid" class="btn btn-info rounded-0" type="submit">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="alert alert-danger" *ngIf="loginError">{{loginError.error.detail}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
