@@ -12,15 +12,118 @@
             </nav>
 
             <h2 class="h2" style="font-family: 'Times New Roman', Times, serif;">Expenditure</h2>
-            <button class="btn btn-info rounded-0" style="float:right;margin-top:-45px;">
+            <button class="btn btn-info rounded-0" style="float:right;margin-top:-45px;" (click)="openModal(template)">
                 <span><i class="fa fa-plus"></i></span>
                 Add Expense
             </button>
+            <ng-template #template>
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Add Your Expense</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="addExpense()" [formGroup]="form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Amount</label>
+                                    <input type="number" formControlName="amount" placeholder="Enter amount " class="form-control ">
+                                    <div *ngIf="f.amount.touched && f.amount.invalid">
+                                        <label *ngIf=" f.amount.errors" class="text-danger">
+                                            <small>
+                                                 Amount is required
+                                            </small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Category</label>
+                                    <select formControlName="category" class="form-control">
+                                        <option value="ONLINE_SERVICES">Online Services</option>
+                                        <option value="TRAVE">Travel</option>
+                                        <option value="FOOD">Food</option>
+                                        <option value="RENT">Rent</option>
+                                        <option value="TRANSPORT">Transport</option>
+                                        <option value="FEES">Fees</option>
+                                        <option value="OTHERS">Others</option>
+                                    </select>
+                                </div>
+                                <div *ngIf="f.category.touched && f.category.invalid">
+                                    <label *ngIf=" f.category.errors" class="text-danger">
+                                        <small>
+                                              Select a category
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <label for=" ">Date</label>
+                                    <input type="date" formControlName="date" class="form-control">
+                                </div>
+                                <div *ngIf="f.date.touched && f.amount.invalid">
+                                    <label *ngIf=" f.date.errors" class="text-danger">
+                                        <small>
+                                             Date is required
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for=" ">Description</label>
+                                    <textarea rows="3" class="form-control" formControlName="description" placeholder="Expense description "></textarea>
+                                    <div *ngIf="f.description.touched && f.description.invalid">
+                                        <label *ngIf=" f.description.errors" class="text-danger">
+                                            <small>
+                                                 Description is required && must be should contain atleast 6 characters
+                                            </small>
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group float-right">
+                                    <button class="btn btn-info rounded-0" [disabled]="!form.valid">
+                                        <span class="spinner-border spinner-border-sm mr-1" *ngIf="loading"></span>
+                                        Submit Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ng-template>
+            <ng-template #edit>
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Modal</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{expenses.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
             <hr>
             <p>Welcome to your Income and Expenditure overview for (Daily, Monthly and Annual).</p>
-            <div class="row my-4" *ngIf="expenses">
-                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0" *ngFor="let expense of expenses">
-                    <div class="card" style="font-family:'Times New Roman', Times, serif">
+            <!-- <div class="row my-4 " *ngIf="expenses ">
+                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0 " *ngFor="let expense of expenses ">
+                    <div class="card " style="font-family: 'Times New Roman', Times, serif ">
                         <h5 class="card-header ">{{expense.category | titlecase}}</h5>
                         <div class="card-body ">
                             <h5 class="card-title ">Ksh: {{expense.amount | currency: 'Kshs'}}</h5>
@@ -31,66 +134,50 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 ">
-                    <div class="card ">
-                        <h5 class="card-header ">Revenue</h5>
-                        <div class="card-body ">
-                            <h5 class="card-title ">$2.4k</h5>
-                            <p class="card-text ">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success ">4.6% increase since last month</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 ">
-                    <div class="card ">
-                        <h5 class="card-header ">Purchases</h5>
-                        <div class="card-body ">
-                            <h5 class="card-title ">43</h5>
-                            <p class="card-text ">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-danger ">2.6% decrease since last month</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3 ">
-                    <div class="card ">
-                        <h5 class="card-header ">Traffic</h5>
-                        <div class="card-body ">
-                            <h5 class="card-title ">64k</h5>
-                            <p class="card-text ">Feb 1 - Apr 1, United States</p>
-                            <p class="card-text text-success ">2.5% increase since last month</p>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
 
-            <div class="row ">
-                <div class="col-12 col-xl-8 mb-4 mb-lg-0 ">
-                    <div class="card ">
-                        <h5 class="card-header ">Latest Expenditure</h5>
-                        <div class="card-body ">
-                            <div class="table-responsive ">
-                                <table class="table ">
+            </div> -->
+
+            <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+                    <div class="card">
+                        <h5 class="card-header">Latest Expenditure</h5>
+                        <div class="card-body" style="font-family:'Times New Roman', Times, serif;">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col ">ID</th>
-                                            <th scope="col ">Category</th>
-                                            <th scope="col ">Amount</th>
-                                            <th scope="col ">Date</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Date</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of expenses">
+                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 6, currentPage: p}">
                                             <th scope="row">{{item.id}}</th>
                                             <td>{{item.category | titlecase}}</td>
                                             <td>{{item.amount | currency: 'Ksh'}}</td>
                                             <td>{{item.date | date}}</td>
-                                            <!-- <td><a href="# " class="btn btn-sm btn-primary ">View</a></td> -->
+                                            <td>
+                                                <button class="btn btn-info btn-sm rounded-0" (click)="viewMoreModal(edit)">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-success btn-sm rounded-0">
+                                                    <i class="far fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-danger rounded-0 btn-sm">
+                                                    <i class="far fa-trash-alt"></i> 
+                                                 </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <a href="" class="btn btn-block btn-light">View all</a> -->
+                            <!-- <a href=" " class="btn btn-block btn-light ">View all</a> -->
+                            <div class="d-flex justify-content-center mt-3 ">
+                                <pagination-controls (pageChange)="p=$event " class="my-pagination "></pagination-controls>
+                            </div>
                         </div>
                     </div>
                 </div>
