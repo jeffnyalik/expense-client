@@ -29,6 +29,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthService } from './services/auth/auth.service';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
+import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
 
 
 
@@ -47,7 +48,8 @@ import { RegisterComponent } from './components/authentication/register/register
     EmailVerifyComponent,
     NavBarComponent,
     FooterComponent,
-    IncomeComponent
+    IncomeComponent,
+    ExpenseDetailComponent
   ],
   imports: [
     BrowserModule,

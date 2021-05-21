@@ -43,11 +43,8 @@
                                 <div class="form-group">
                                     <label for="">Category</label>
                                     <select formControlName="category" class="form-control">
-                                        <option value="ONLINE_SERVICES">Online Services</option>
-                                        <option value="TRAVE">Travel</option>
                                         <option value="FOOD">Food</option>
                                         <option value="RENT">Rent</option>
-                                        <option value="TRANSPORT">Transport</option>
                                         <option value="FEES">Fees</option>
                                         <option value="OTHERS">Others</option>
                                     </select>
@@ -63,7 +60,7 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for=" ">Date</label>
-                                    <input type="date" formControlName="date" class="form-control">
+                                    <input type="date" formControlName="date" class="form-control" min="{{minDate}}">
                                 </div>
                                 <div *ngIf="f.date.touched && f.amount.invalid">
                                     <label *ngIf=" f.date.errors" class="text-danger">
@@ -103,50 +100,65 @@
                     </form>
                 </div>
             </ng-template>
-            <ng-template #edit>
-                <div class="modal-header">
-                    <h4 class="modal-title pull-left">Modal</h4>
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>{{expenses.description}}</p>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
 
             <hr>
             <p>Welcome to your Income and Expenditure overview for (Daily, Monthly and Annual).</p>
-            <!-- <div class="row my-4 " *ngIf="expenses ">
-                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0 " *ngFor="let expense of expenses ">
-                    <div class="card " style="font-family: 'Times New Roman', Times, serif ">
-                        <h5 class="card-header ">{{expense.category | titlecase}}</h5>
-                        <div class="card-body ">
-                            <h5 class="card-title ">Ksh: {{expense.amount | currency: 'Kshs'}}</h5>
-                            <p class="card-text ">Date: {{expense.date | date}}</p>
-                            <p class="card-text text-success ">
-                                {{expense.description}}
-                            </p>
+            <div class="row my-4">
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-blue order-card rounded-0">
+                        <h4 class="card-header">School Fees</h4>
+                        <div class="card-block">
+                            <h2 class="text-left">Fees: <span>
+                                {{expenseSummary.category_data.FEES?.amount}}
+                            </span></h2>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-yellow order-card rounded-0">
+                        <h4 class="card-header">House Rent</h4>
+                        <div class="card-block">
+                            <h2 class="text-left">Rent: <span>
+                                {{expenseSummary.category_data.RENT?.amount}}
+                            </span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-green order-card rounded-0">
+                        <h4 class="card-header">Household Foods</h4>
+                        <div class="card-block">
+                            <h2 class="text-left">Food: <span>
+                                {{expenseSummary.category_data.FOOD?.amount}}
+                            </span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-3">
+                    <div class="card bg-c-pink order-card rounded-0">
+                        <h4 class="card-header">Other Expenses</h4>
+                        <div class="card-block">
+                            <h2 class="text-left">Others: <span>
+                                {{expenseSummary.category_data.OTHERS?.amount}}
+                            </span></h2>
                         </div>
                     </div>
                 </div>
 
-            </div> -->
+            </div>
+
 
             <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-lg-0">
                     <div class="card">
                         <h5 class="card-header">Latest Expenditure</h5>
-                        <div class="card-body" style="font-family:'Times New Roman', Times, serif;">
+                        <div class="card-body" style="font-family:'Times New Roman', Times, serif;font-size:medium;" *ngIf="expenses">
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">ID</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Amount</th>
                                             <th scope="col">Date</th>
@@ -154,21 +166,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 6, currentPage: p}">
-                                            <th scope="row">{{item.id}}</th>
+                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 5, currentPage: p}">
                                             <td>{{item.category | titlecase}}</td>
-                                            <td>{{item.amount | currency: 'Ksh'}}</td>
+                                            <td>{{item.amount | currency }}</td>
                                             <td>{{item.date | date}}</td>
                                             <td>
-                                                <button class="btn btn-info btn-sm rounded-0" (click)="viewMoreModal(edit)">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                <button class="btn btn-info btn-sm rounded-0" [routerLink]="['/expense-detail', item.id]" routerLinkActive="router-link-active">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>View 
                                                 </button>
-                                                <button class="btn btn-success btn-sm rounded-0">
-                                                    <i class="far fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger rounded-0 btn-sm">
-                                                    <i class="far fa-trash-alt"></i> 
-                                                 </button>
+
                                             </td>
                                         </tr>
                                     </tbody>
@@ -179,6 +185,11 @@
                                 <pagination-controls (pageChange)="p=$event " class="my-pagination "></pagination-controls>
                             </div>
                         </div>
+                        <!-- <ng-template #elseBlock>
+                            <div style="text-align: center;font: size 30px;">
+                                <p>No data available for now</p>
+                            </div>
+                        </ng-template> -->
                     </div>
                 </div>
                 <div class="col-12 col-xl-4 ">

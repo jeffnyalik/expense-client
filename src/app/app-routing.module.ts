@@ -13,12 +13,16 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
+import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
 
   
   const routes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard]},
+  {path: 'expenses/:id', component: ExpensesComponent, canActivate: [AuthGuard]},
+
+  {path: 'expense-detail/:id', component: ExpenseDetailComponent, canActivate: [AuthGuard]},
   {path: 'income', component: IncomeComponent, canActivate: [AuthGuard]},
   {path:'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

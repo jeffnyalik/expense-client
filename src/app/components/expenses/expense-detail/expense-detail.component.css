@@ -1,0 +1,29 @@
+.amount {
+    padding: 1rem;
+}
+
+.dates {
+    padding: 1rem;
+}
+
+.description {
+    padding: 1rem;
+}
+
+.inline-block-child {
+    display: inline-block;
+}
+
+.inline-block-child-b {
+    display: inline-block;
+    float: right;
+}
+
+.inline-block-child-d {
+    display: inline-block;
+    float: right;
+}
+
+.go-back {
+    text-align: right;
+}
