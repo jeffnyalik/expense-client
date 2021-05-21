@@ -25,7 +25,6 @@ import { ExpenseDetailComponent } from './expense-detail/expense-detail.componen
 export class ExpensesComponent implements OnInit {
   p: any;
   id: any;
-  amount = 0;
   minDate = "";
   expenseSummary = {
     "category_data": {
@@ -103,7 +102,6 @@ export class ExpensesComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    ExpenseDetailComponent
   }
 
   viewMoreModal(edit: TemplateRef<any>){

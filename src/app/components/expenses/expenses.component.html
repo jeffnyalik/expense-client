@@ -109,7 +109,7 @@
                         <h4 class="card-header">School Fees</h4>
                         <div class="card-block">
                             <h2 class="text-left">Fees: <span>
-                                {{expenseSummary.category_data.FEES?.amount}}
+                                {{expenseSummary.category_data.FEES?.amount | currency}}
                             </span></h2>
 
                         </div>
@@ -120,7 +120,7 @@
                         <h4 class="card-header">House Rent</h4>
                         <div class="card-block">
                             <h2 class="text-left">Rent: <span>
-                                {{expenseSummary.category_data.RENT?.amount}}
+                                {{expenseSummary.category_data.RENT?.amount | currency}}
                             </span></h2>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <h4 class="card-header">Household Foods</h4>
                         <div class="card-block">
                             <h2 class="text-left">Food: <span>
-                                {{expenseSummary.category_data.FOOD?.amount}}
+                                {{expenseSummary.category_data.FOOD?.amount | currency}}
                             </span>
                             </h2>
                         </div>
@@ -141,7 +141,7 @@
                         <h4 class="card-header">Other Expenses</h4>
                         <div class="card-block">
                             <h2 class="text-left">Others: <span>
-                                {{expenseSummary.category_data.OTHERS?.amount}}
+                                {{expenseSummary.category_data.OTHERS?.amount | currency}}
                             </span></h2>
                         </div>
                     </div>

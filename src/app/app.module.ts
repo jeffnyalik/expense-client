@@ -30,6 +30,7 @@ import { AuthService } from './services/auth/auth.service';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
+import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
 
 
 
@@ -49,7 +50,8 @@ import { ExpenseDetailComponent } from './components/expenses/expense-detail/exp
     NavBarComponent,
     FooterComponent,
     IncomeComponent,
-    ExpenseDetailComponent
+    ExpenseDetailComponent,
+    IncomeDetailComponent
   ],
   imports: [
     BrowserModule,

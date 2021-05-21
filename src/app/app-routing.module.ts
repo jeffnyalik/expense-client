@@ -14,6 +14,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
+import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
 
   
   const routes: Routes = [
@@ -24,6 +25,7 @@ import { ExpenseDetailComponent } from './components/expenses/expense-detail/exp
 
   {path: 'expense-detail/:id', component: ExpenseDetailComponent, canActivate: [AuthGuard]},
   {path: 'income', component: IncomeComponent, canActivate: [AuthGuard]},
+  {path: 'income-detail/:id', component: IncomeDetailComponent, canActivate: [AuthGuard]},
   {path:'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'email-verify', component: EmailVerifyComponent},

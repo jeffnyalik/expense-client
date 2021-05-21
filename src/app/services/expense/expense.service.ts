@@ -15,7 +15,10 @@ import { ExpenseSummary } from './../../models/summary/expense';
 export class ExpenseService {
   public BASE_URL = environment.BASE_URL;
   public EXPENSE_URL = 'expenses/';
+  public INCOME_URL = 'income/';
   public EXPENSE_SUMMARY = 'userstats/expense-summary-data'
+  public INCOME_SUMMARY = 'userstats/income-summary-data'
+
   
 
   constructor(private httpClient: HttpClient) { }
@@ -52,5 +55,34 @@ export class ExpenseService {
     .pipe(tap(() =>{
       this._refreshPage$.next();
     }))
+  }
+
+  //####Income####//
+  getIncome(): Observable<any>{
+    return this.httpClient.get(`${this.BASE_URL}${this.INCOME_URL}`);
+  }
+
+  addIncome(model:any){
+    return this.httpClient.post(`${this.BASE_URL}${this.INCOME_URL}`, model);
+  }
+
+  singleIncome(id: any): Observable<any>{
+    return this.httpClient.get(`${this.BASE_URL}${this.INCOME_URL}${id}`, id);
+  }
+
+  updateIncome(id, data): Observable<any>{
+    return this.httpClient.put(`${this.BASE_URL}${this.INCOME_URL}${id}`, data);
+  }
+
+  removeIncome(id): Observable<any>{
+    return this.httpClient.delete(`${this.BASE_URL}${this.INCOME_URL}${id}`, id);
+  }
+  
+  incomeRevenue():Observable<any>{
+    return this.httpClient.get(`${this.BASE_URL}${this.INCOME_SUMMARY}`)
+    .pipe(tap(() =>{
+      this._refreshPage$.next();
+    }))
+
   }
 }
