@@ -7,14 +7,15 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
+import { Chart, registerables} from 'chart.js';
+
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
+
 import { AlertifyService } from './../../services/alertify.service';
-import { ExpenseSummary } from './../../models/summary/expense';
 import { AuthService } from './../../services/auth/auth.service';
 import { ExpenseService } from './../../services/expense/expense.service';
 
-import { ExpenseDetailComponent } from './expense-detail/expense-detail.component';
-
-
+Chart.register(...registerables);
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ExpensesComponent implements OnInit {
   p: any;
   id: any;
   minDate = "";
+  ctx:any;
   expenseSummary = {
     "category_data": {
       "FEES": {
@@ -47,7 +49,14 @@ export class ExpensesComponent implements OnInit {
   submited: boolean = false;
   expenses: any;
   modalRef: BsModalRef;
+  category_data:any
   jwtHelper = new JwtHelperService();
+  expense_chart:any;
+  datas = []
+  rent = []
+  food = []
+  others = []
+  
   constructor(private exServices: ExpenseService,
     private router: Router,
     private alerts: AlertifyService, 
@@ -56,6 +65,7 @@ export class ExpensesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private expense: ExpenseService,
     private route: ActivatedRoute,
+    
     ) { 
 
       this.form = formBuilder.group({
@@ -64,19 +74,66 @@ export class ExpensesComponent implements OnInit {
         'category': ['', Validators.required],
         'description': ['', [Validators.required, Validators.minLength(6)]]
       })
+      
   }
 
   ngOnInit(): void {
-    this.getExpenses();
-  
+    this.getExpenses()
     this.getAllExpenseSummary();
     // this.expense.refreshNeeded$.subscribe(res =>{
     //   this.getAllExpenseSummary();
     // })
-
     this.getDate();
-  }
+    this.expense.expenseSummary().subscribe(data =>{
+      this.datas.push(data.category_data.FEES.amount);
+      this.rent.push(data.category_data.RENT.amount);
+      this.food.push(data.category_data.FOOD.amount);
+      this.others.push(data.category_data.OTHERS.amount);
+    })
+      // this.datas.push(data.category_data.FEES.amount)})
+    // Chart js configuration
+    setTimeout(() => {
+      this.ctx = document.getElementById('myChart');
+      this.expense_chart = new Chart(this.ctx, {
+      type: 'pie',
+      
+      data: {
+        labels: ['Fees', 'Rent', 'Food', 'Others'],
+        datasets: [
+          {
+            data: [
+              this.datas,
+              this.rent,
+              this.food,
+              this.others,
+            ],
+            backgroundColor: [
+                '#73b4ff',
+                '#ffcb80',
+                '#59e0c5',
+                '#ff869a'
+            ],
+            borderWidth: 1
+            
+        },
+      ],
 
+    },
+    
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+      
+     
+  });
+    }, 1000);
+    // end 
+  }
+  
   getDate(){
     let date = new Date();
 
@@ -154,3 +211,7 @@ private getAllExpenseSummary(){
 }
   
 }
+function foods(foods: any) {
+  throw new Error('Function not implemented.');
+}
+
