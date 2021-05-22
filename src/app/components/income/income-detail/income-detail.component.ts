@@ -22,6 +22,8 @@ export class IncomeDetailComponent implements OnInit {
   submitted: boolean = false;
   modalRef: BsModalRef
   incomeInfo: any;
+  expense_chart:any;
+ 
   constructor(
     private bsModalService: BsModalService,
     private formBuilder: FormBuilder,
