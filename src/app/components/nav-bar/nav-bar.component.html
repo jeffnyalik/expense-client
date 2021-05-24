@@ -44,45 +44,42 @@
 </nav>
 <!-- Main -->
 <div class="container-fluid ">
-    <div class="row ">
+    <div class="row">
         <nav id="sidebar " class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
-            <div class="position-sticky ">
-                <ul class="nav flex-column ">
+            <div class="position-sticky">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="logo">
+                            <img src="../../../assets/images/profile/prof.png" width="85" alt="">
+                        </span>
+                    </div>
+                </div>
+                <ul class=" nav flex-column ">
                     <li class="nav-item ">
-                        <a class="nav-link active " aria-current="page " href="# ">
-                            <i class="fa fa-tachometer-alt "></i>
+                        <a aria-current="page ">
                             <span class="ml-2 ">
-                                <a [routerLink]="[ '/dashboard'] " routerLinkActive="router-link-active " >
-                                    Dashboard
+                                <a class="nav-link " [routerLink]="[ '/expenses'] " routerLinkActive="router-link-active-expense" routerLinkActiveOptions="{exact:true} ">
+                                    <i class="fa fa-tachometer-alt "></i> Dashboard
                                 </a>
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link ">
-                            <i class="fas fa-money-check-alt "></i>
-                            <span class="ml-2">
-                                <a [routerLink]="['/expenses']" routerLinkActive="router-link-active" >Expenses</a>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link " href="# ">
-                            <i class="fas fa-money-bill "></i>
+                    <!-- <li class="nav-item ">
+                        <a>
                             <span class="ml-2 ">
-                                <a [routerLink]="[ '/income'] " routerLinkActive="router-link-active ">
-                                    Income
+                                <a class="nav-link " [routerLink]="[ '/expenses'] " routerLinkActive="router-link-active " >
+                                    <i class="fas fa-money-check-alt "></i>   Expenses
                                 </a>
-                                
                             </span>
                         </a>
-                    </li>
-
+                    </li> -->
                     <li class="nav-item ">
-                        <a class="nav-link " href="# ">
-                            <i class="fas fa-chart-bar "></i>
-
-                            <span class="ml-2 ">Reports</span>
+                        <a>
+                            <span class="ml-2 ">
+                                <a class="nav-link " [routerLink]="[ '/income'] " routerLinkActive="router-link-active-income">
+                                    <i class="fas fa-money-bill "></i> Income
+                                </a>
+                            </span>
                         </a>
                     </li>
                 </ul>

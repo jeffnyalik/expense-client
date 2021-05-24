@@ -18,8 +18,8 @@ import { IncomeDetailComponent } from './components/income/income-detail/income-
 
   
   const routes: Routes = [
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: '', component: ExpensesComponent, canActivate: [AuthGuard]},
+  // {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard]},
   {path: 'expenses/:id', component: ExpensesComponent, canActivate: [AuthGuard]},
 

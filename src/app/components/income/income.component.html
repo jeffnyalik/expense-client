@@ -131,7 +131,6 @@
                         <div class="card-block">
                             <h2 class="text-left">Side hustle: <span>
                                 {{incomeSummary.income_data.SIDE_HUSTLE?.amount | currency}}
-
                             </span>
                             </h2>
                         </div>
@@ -166,7 +165,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of incomeRevenue | paginate: {itemsPerPage: 5, currentPage: p}">
+                                        <tr *ngFor="let item of incomeRevenue | paginate: {itemsPerPage: 4, currentPage: p}">
                                             <td>{{item.source | titlecase}}</td>
                                             <td>{{item.amount | currency}}</td>
                                             <td>{{item.date | date}}</td>

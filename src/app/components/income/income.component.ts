@@ -23,10 +23,10 @@ export class IncomeComponent implements OnInit {
  submitted:boolean = false;
  minDate = "";
  form = new FormGroup({});
- salary = []
- business = []
- side_hustle = []
- others = []
+ salary:any = []
+ business:any = []
+ side_hustle:any = []
+ others:any = []
  income_chart: any;
  ctx:any;
  amount = 0;
@@ -68,10 +68,10 @@ export class IncomeComponent implements OnInit {
     this.getDate();
 
     this.income.incomeRevenue().subscribe(data =>{
-      this.salary.push(data.income_data.SALARY.amount);
-      this.business.push(data.income_data.BUSINESS.amount);
-      this.side_hustle.push(data.income_data.SIDE_HUSTLE.amount);
-      this.others.push(data.income_data.OTHERS.amount);
+      this.salary.push(data.income_data.SALARY?.amount);
+      this.business.push(data.income_data.BUSINESS?.amount);
+      this.side_hustle.push(data.income_data.SIDE_HUSTLE?.amount);
+      this.others.push(data.income_data.OTHERS?.amount);
     })
 
      // Chart js configuration

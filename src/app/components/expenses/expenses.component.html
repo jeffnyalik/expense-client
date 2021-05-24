@@ -166,7 +166,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 5, currentPage: p}">
+                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 4, currentPage: p}">
                                             <td>{{item.category | titlecase}}</td>
                                             <td>{{item.amount | currency }}</td>
                                             <td>{{item.date | date}}</td>

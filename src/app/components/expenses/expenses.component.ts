@@ -85,10 +85,10 @@ export class ExpensesComponent implements OnInit {
     // })
     this.getDate();
     this.expense.expenseSummary().subscribe(data =>{
-      this.datas.push(data.category_data.FEES.amount);
-      this.rent.push(data.category_data.RENT.amount);
-      this.food.push(data.category_data.FOOD.amount);
-      this.others.push(data.category_data.OTHERS.amount);
+      this.datas.push(data.category_data.FEES?.amount);
+      this.rent.push(data.category_data.RENT?.amount);
+      this.food.push(data.category_data.FOOD?.amount);
+      this.others.push(data.category_data.OTHERS?.amount);
     })
       // this.datas.push(data.category_data.FEES.amount)})
     // Chart js configuration
