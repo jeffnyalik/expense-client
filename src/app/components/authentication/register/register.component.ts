@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ConfirmedValidator } from 'src/app/password_helper/confirmed.validator';
 
+import { AlertifyService } from './../../../services/alertify.service';
 import { AuthService } from './../../../services/auth/auth.service';
 
 
@@ -19,7 +21,10 @@ export class RegisterComponent implements OnInit {
   userTakenError: string;
   emailTakenError: string;
 
-  constructor(private formBuilder: FormBuilder, private auth: AuthService) { 
+  constructor(private formBuilder: FormBuilder,
+     private auth: AuthService,
+     private alerts: AlertifyService,
+     private router: Router) { 
     this.form = this.formBuilder.group({
       'username': ['', [Validators.required, Validators.minLength(6)]],
       'email': ['', [Validators.required, Validators.email]],
@@ -50,7 +55,9 @@ export class RegisterComponent implements OnInit {
           console.log(data)
           console.log('AN ACTIVATION LINK HAS BEEN SENT TO YOUR INBOX, KINLDY ACTIVATE')
           this.form.reset()
-          this.loading = false
+          this.loading = true
+          this.router.navigate(['/confirm-message'])
+          this.alerts.success('Registraion is a success, kindly confirm your email.')
         }, error=>{
           this.loading = false;
           this.userTakenError = error;

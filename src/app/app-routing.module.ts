@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EmailVerifyComponent } from './components/email-verify/email-verify.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
@@ -19,7 +20,7 @@ import { IncomeDetailComponent } from './components/income/income-detail/income-
   
   const routes: Routes = [
   {path: '', component: ExpensesComponent, canActivate: [AuthGuard]},
-  // {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: 'confirm-message', component: ConfirmMessageComponent},
   {path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard]},
   {path: 'expenses/:id', component: ExpensesComponent, canActivate: [AuthGuard]},
 

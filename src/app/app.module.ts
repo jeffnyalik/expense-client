@@ -31,6 +31,8 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
 import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
+import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
+import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
 
 
 
@@ -51,7 +53,9 @@ import { IncomeDetailComponent } from './components/income/income-detail/income-
     FooterComponent,
     IncomeComponent,
     ExpenseDetailComponent,
-    IncomeDetailComponent
+    IncomeDetailComponent,
+    ConfirmMessageComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
