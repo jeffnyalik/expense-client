@@ -1,13 +1,14 @@
 import { Router } from '@angular/router';
-import { AlertifyService } from './../alertify.service';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import {map} from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { AlertifyService } from './../alertify.service';
 import { environment } from './../../../environments/environment';
 
 
@@ -23,6 +24,9 @@ public BASE_URL = environment.BASE_URL;
 public LOGIN_URL = 'auth/login/';
 public REGISTER_URL = 'auth/register/';
 public VERIFY_EMAIL = 'auth/email-verify';
+public PASSWORD_RESET_CONFIRM = 'auth/request-reset-email/';
+public PASSWORD_RESET = 'auth/password-reset';
+public PASSWORD_RESET_CHANGE = 'auth/password-change/';
 
   private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
   private userName = new BehaviorSubject<string>(localStorage.getItem('username'));
@@ -117,4 +121,20 @@ public VERIFY_EMAIL = 'auth/email-verify';
     params = params.append('token', token);
     return this.httpClient.get(`${this.BASE_URL}${this.VERIFY_EMAIL}`, {params:params});
   }
+
+  resePassword(form:any){
+    return this.httpClient.post(`${this.BASE_URL}${this.PASSWORD_RESET_CONFIRM}`, form);
+  }
+  
+  resetPasswordConfirm(uidb64:any, token:any){
+    let params = new HttpParams();
+    // params = params.append('uidb64', 'token');
+    params = params.appendAll({'uidb64': uidb64, 'token': token});
+    return this.httpClient.get(`${this.BASE_URL}${this.PASSWORD_RESET}`, {params:params});
+  }
+
+  resetPasswordSubmit(form:any){
+    return this.httpClient.patch(`${this.BASE_URL}${this.PASSWORD_RESET_CHANGE}`, form);
+  }
+  
 }

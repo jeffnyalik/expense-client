@@ -33,6 +33,7 @@ import { ExpenseDetailComponent } from './components/expenses/expense-detail/exp
 import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
 import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
 import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
+import { PasswordResetComponent } from './components/authentication/password-reset/password-reset.component';
 
 
 
@@ -55,7 +56,8 @@ import { ForgotPasswordComponent } from './components/authentication/forgot-pass
     ExpenseDetailComponent,
     IncomeDetailComponent,
     ConfirmMessageComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,
