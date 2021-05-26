@@ -1,9 +1,14 @@
-export class ExpenseSummary{
-    amount?: any;
-    category?: string;
-    category_data?: string;
-    FEES?: string;
-    FOOD?: string;
-    RENT?: string;
-    OTHERS?: string;
+export interface ExpenseSummary{
+    FEES: {
+        amount: string;
+    },
+    RENT: {
+        amount: string;
+    },
+    FOOD: {
+        amount: string;
+    },
+    OTHERS: {
+        amount: string;
+    },
 }

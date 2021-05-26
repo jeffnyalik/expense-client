@@ -109,7 +109,7 @@
                         <h4 class="card-header">School Fees</h4>
                         <div class="card-block">
                             <h2 class="text-left">Fees: <span>
-                                {{expenseSummary.category_data.FEES?.amount | currency}}
+                                {{getTotolFees()}}
                             </span></h2>
 
                         </div>
@@ -120,7 +120,7 @@
                         <h4 class="card-header">House Rent</h4>
                         <div class="card-block">
                             <h2 class="text-left">Rent: <span>
-                                {{expenseSummary.category_data.RENT?.amount | currency}}
+                                {{getTotolRent()}}
                             </span></h2>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <h4 class="card-header">Household Foods</h4>
                         <div class="card-block">
                             <h2 class="text-left">Food: <span>
-                                {{expenseSummary.category_data.FOOD?.amount | currency}}
+                                {{getTotolFood()}}
                             </span>
                             </h2>
                         </div>
@@ -141,7 +141,7 @@
                         <h4 class="card-header">Other Expenses</h4>
                         <div class="card-block">
                             <h2 class="text-left">Others: <span>
-                                {{expenseSummary.category_data.OTHERS?.amount | currency}}
+                                {{getTotolOthers()}}
                             </span></h2>
                         </div>
                     </div>
@@ -185,11 +185,7 @@
                                 <pagination-controls (pageChange)="p=$event " class="my-pagination "></pagination-controls>
                             </div>
                         </div>
-                        <!-- <ng-template #elseBlock>
-                            <div style="text-align: center;font: size 30px;">
-                                <p>No data available for now</p>
-                            </div>
-                        </ng-template> -->
+
                     </div>
                 </div>
                 <div class="col-12 col-xl-4">

@@ -9,14 +9,13 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Chart, registerables} from 'chart.js';
 
-import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
-
 import { AlertifyService } from './../../services/alertify.service';
+import { Expense } from './../../models/expense/expense';
 import { AuthService } from './../../services/auth/auth.service';
 import { ExpenseService } from './../../services/expense/expense.service';
+import { ExpenseSummary } from 'src/app/models/summary/expense';
 
 Chart.register(...registerables);
-
 
 @Component({
   selector: 'app-expenses',
@@ -28,35 +27,28 @@ export class ExpensesComponent implements OnInit {
   id: any;
   minDate = "";
   ctx:any;
-  expenseSummary = {
-    "category_data": {
-      "FEES": {
-        "amount": "0"
-      },
-      'RENT': {
-        "amount": "0"
-      },
-      'FOOD': {
-        "amount": "0"
-      },
-      'OTHERS': {
-        "amount": "0"
-      },
-    }
-  }
+  expenseSummary;
   form = new FormGroup({});
   loading: boolean = false;
   submited: boolean = false;
-  expenses: any;
+  expenses: Expense[] = [];
   modalRef: BsModalRef;
   category_data:any
   jwtHelper = new JwtHelperService();
   expense_chart:any;
-  datas = []
-  rent = []
-  food = []
-  others = []
+
+
+  datas:  Expense[] = []
+  rent:   Expense[] = []
+  food:   Expense[] = []
+  others: Expense[] = []
   
+  feeSummary: ExpenseSummary[] = [];
+  rentSummary: ExpenseSummary[] = [];
+  foodSummary: ExpenseSummary[] = [];
+  othersSummary: ExpenseSummary[] = [];
+
+
   constructor(private exServices: ExpenseService,
     private router: Router,
     private alerts: AlertifyService, 
@@ -78,18 +70,18 @@ export class ExpensesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getExpenses()
+    this.getExpenses();
     this.getAllExpenseSummary();
     // this.expense.refreshNeeded$.subscribe(res =>{
     //   this.getAllExpenseSummary();
     // })
     this.getDate();
-    this.expense.expenseSummary().subscribe(data =>{
-      this.datas.push(data.category_data.FEES?.amount);
-      this.rent.push(data.category_data.RENT?.amount);
-      this.food.push(data.category_data.FOOD?.amount);
-      this.others.push(data.category_data.OTHERS?.amount);
-    })
+    // this.expense.expenseSummary().subscribe(data =>{
+    //   this.datas.push(data.FEES.amount);
+    //   this.rent.push(data.RENT.amount);
+    //   this.food.push(data.FOOD.amount);
+    //   this.others.push(data.OTHERS.amount);
+    // })
       // this.datas.push(data.category_data.FEES.amount)})
     // Chart js configuration
     setTimeout(() => {
@@ -103,9 +95,9 @@ export class ExpensesComponent implements OnInit {
           {
             data: [
               this.datas,
-              this.rent,
-              this.food,
-              this.others,
+              this.getTotolRent(),
+              this.getTotolFood(),
+              this.getTotolOthers(),
             ],
             backgroundColor: [
                 '#73b4ff',
@@ -133,6 +125,67 @@ export class ExpensesComponent implements OnInit {
     }, 1000);
     // end 
   }
+
+  getTotolFees(){
+    let total = 0;
+    this.expenses.forEach(e =>{
+      if(e.category === 'FEES'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount;
+        }
+        
+      }
+    })
+    return total;
+  }
+  getTotolFood(){
+    let total  = 0;
+    this.expenses.forEach(e =>{
+      if(e.category === 'FOOD'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount
+        }
+      }
+    })
+    return total;
+  }
+
+  getTotolRent(){
+    let total  = 0;
+    this.expenses.forEach(e =>{
+      if(e.category === 'RENT'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount
+        }
+      }
+    })
+    return total;
+  }
+
+  getTotolOthers(){
+    let total  = 0;
+    this.expenses.forEach(e =>{
+      if(e.category === 'OTHERS'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount
+        }
+      }
+    })
+    return total;
+  }
+
   
   getDate(){
     let date = new Date();
@@ -167,10 +220,27 @@ export class ExpensesComponent implements OnInit {
 
   getExpenses(){
     //call all the expense in this method
-    this.exServices.allExpenses().subscribe(data =>{
-      this.expenses = data;
+    this.exServices.allExpenses().subscribe((expenses:Expense[]) =>{
+      this.expenses = expenses;
       console.log(this.expenses);
+      this.expenses.forEach(e =>{
+       this.allocateExpense(e);
+      })
     }, error => console.log(error))
+  }
+
+  private allocateExpense(expense:Expense){
+    if(expense?.category === 'FOOD'){
+      this.food.push(expense);
+    }else if(expense?.category === 'RENT'){
+      this.rent.push(expense);
+
+    }else if(expense?.category === 'FEES'){
+      this.datas.push(expense);
+    }else{
+      this.others.push(expense);
+
+    }
   }
 
   addExpense(){
@@ -181,13 +251,15 @@ export class ExpensesComponent implements OnInit {
       return;
   }
 
-  this.expense.addExpense(this.form.value).subscribe(data =>{
-    console.log(data);
+  this.expense.addExpense(this.form.value).subscribe((expense: Expense) =>{
+    console.log(expense);
+    this.expenses.push(expense);
+    this.allocateExpense(expense);
     this.alerts.success("Expense added successfully.");
     this.form.reset();
     this.loading = false
     this.modalService.hide();
-    this.getExpenses();
+    // this.getExpenses();
   }, error=>{
     console.log(error);
   });
@@ -202,8 +274,8 @@ expenseInfo(){
 }
 
 private getAllExpenseSummary(){
-  this.expense.expenseSummary().subscribe(data =>{
-    this.expenseSummary = data;
+  this.expense.expenseSummary().subscribe((summary: ExpenseSummary[]) =>{
+    this.expenseSummary = summary;
     console.log(this.expenseSummary);
   }, error =>{
     console.log(error);
