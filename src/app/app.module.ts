@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -18,6 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { AlertifyService } from './services/alertify.service';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EmailVerifyComponent } from './components/email-verify/email-verify.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
@@ -27,14 +29,12 @@ import { IncomeComponent } from './components/income/income.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthService } from './services/auth/auth.service';
+import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
 import { LoginComponent } from './components/authentication/login/login.component';
+import { PasswordResetComponent } from './components/authentication/password-reset/password-reset.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
 import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
-import { ConfirmMessageComponent } from './components/confirm-message/confirm-message.component';
-import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
-import { PasswordResetComponent } from './components/authentication/password-reset/password-reset.component';
-
 
 
 
@@ -67,6 +67,7 @@ import { PasswordResetComponent } from './components/authentication/password-res
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
+    MatProgressSpinnerModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),

@@ -1,10 +1,32 @@
-<section class="hero is-danger">
+<section class="hero is-primary is-fullheight">
     <div class="hero-body">
-        <p class="title">
-            Danger hero
-        </p>
-        <p class="subtitle">
-            Danger subtitle
-        </p>
+
+        <div class="container has-text-centered">
+            <div class="card rounded-0">
+                <div class="card-content">
+                    <div class="content">
+                        <h4 class="tex-center">
+                            <p>
+                                Manage your Expenses and Incomes <br> with IncomeExpense App
+                            </p>
+                        </h4>
+                        <hr>
+
+
+                        <button class="button is-info is-active mr-2 rounded-0" (click)="register()">
+                            Register
+                        </button>
+                        <button class="button is-success is-active rounded-0" (click)="login()">
+                            Login
+                        </button>
+                        <div *ngIf="loginLoading" class="center">
+                            <mat-spinner diameter="50" color="accent"></mat-spinner>
+                        </div>
+                        <span *ngIf="registerLoading"><mat-spinner diameter="50" color="accent"></mat-spinner>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
