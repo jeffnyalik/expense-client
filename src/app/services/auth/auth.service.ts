@@ -5,11 +5,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import {map} from 'rxjs/operators';
+import {catchError,retry, map} from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AlertifyService } from './../alertify.service';
 import { environment } from './../../../environments/environment';
+import { Profile } from './../../models/profile/profile';
+import { error } from '@angular/compiler/src/util';
 
 
 
@@ -21,12 +23,15 @@ import { environment } from './../../../environments/environment';
 export class AuthService {
 jwtHelper = new JwtHelperService();
 public BASE_URL = environment.BASE_URL;
+public USER_PROFILE = 'auth/user/';
 public LOGIN_URL = 'auth/login/';
 public REGISTER_URL = 'auth/register/';
 public VERIFY_EMAIL = 'auth/email-verify';
 public PASSWORD_RESET_CONFIRM = 'auth/request-reset-email/';
 public PASSWORD_RESET = 'auth/password-reset';
 public PASSWORD_RESET_CHANGE = 'auth/password-change/';
+public UPDATE_USER_PROFILE = 'auth/update-profile/';
+
 
   private loginStatus = new BehaviorSubject<boolean>(this.checkLoginStatus());
   private userName = new BehaviorSubject<string>(localStorage.getItem('username'));
@@ -135,6 +140,14 @@ public PASSWORD_RESET_CHANGE = 'auth/password-change/';
 
   resetPasswordSubmit(form:any){
     return this.httpClient.patch(`${this.BASE_URL}${this.PASSWORD_RESET_CHANGE}`, form);
+  }
+
+  getUserProfile(): Observable<Profile[]>{
+    return this.httpClient.get<Profile[]>(`${this.BASE_URL}${this.USER_PROFILE}`)
+  }
+
+  updateUserProfile(profile: Profile[]): Observable<Profile[]>{
+    return this.httpClient.put<Profile[]>(`${this.BASE_URL}${this.UPDATE_USER_PROFILE}`, profile)
   }
   
 }

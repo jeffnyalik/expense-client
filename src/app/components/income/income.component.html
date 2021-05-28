@@ -5,7 +5,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Home</a>
+                        <a [routerLink]="['/income']" routerLinkActive="router-link-active">Home</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Overview</li>
                 </ol>
@@ -109,7 +109,7 @@
                         <h4 class="card-header">Salary</h4>
                         <div class="card-block">
                             <h2 class="text-left">Salary: <span>
-                                {{incomeSummary.income_data.SALARY?.amount | currency}}
+                                {{getTotolSalary()|currency}}
                             </span></h2>
 
                         </div>
@@ -120,7 +120,7 @@
                         <h4 class="card-header">Busines</h4>
                         <div class="card-block">
                             <h2 class="text-left">Business: <span>
-                                {{incomeSummary.income_data.BUSINESS?.amount | currency}}
+                                {{getTotolBiz()|currency}}
                             </span></h2>
                         </div>
                     </div>
@@ -129,8 +129,9 @@
                     <div class="card bg-c-green order-card rounded-0">
                         <h4 class="card-header">Side Hustle</h4>
                         <div class="card-block">
-                            <h2 class="text-left">Side hustle: <span>
-                                {{incomeSummary.income_data.SIDE_HUSTLE?.amount | currency}}
+                            <h2 class="text-left">Side hustle:
+                                <span>
+                                {{getTotolSideHustle()|currency}}
                             </span>
                             </h2>
                         </div>
@@ -140,8 +141,9 @@
                     <div class="card bg-c-pink order-card rounded-0">
                         <h4 class="card-header">Other Revenues</h4>
                         <div class="card-block">
-                            <h2 class="text-left">Others: <span>
-                                {{incomeSummary.income_data.OTHERS?.amount | currency}}
+                            <h2 class="text-left">Others:
+                                <span>
+                                {{getTotolOthers()|currency}}
                             </span></h2>
                         </div>
                     </div>

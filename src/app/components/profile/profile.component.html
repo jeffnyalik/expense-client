@@ -1,0 +1,77 @@
+<app-nav-bar></app-nav-bar>
+<div class="container-fluid">
+    <div class="row">
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <nav aria-label="breadcrumb" class="">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a [routerLink]="['/expenses']" routerLinkActive="router-link-active">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                </ol>
+            </nav>
+            <h2 class="h2" style="font-family: 'Times New Roman', Times, serif;">{{profile.username}} Details.</h2>
+            <button class="btn btn-info rounded-0" style="float:right;margin-top:-45px;" [routerLink]="['/expenses']" routerLinkActive="router-link-active">
+                <span><i class="fa fa-plus"></i></span>
+                Go Back
+            </button>
+
+            <hr>
+            <div class="center">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Username">Username</label>
+                                <input type="text" class="form-control" readonly name="username" placeholder="Username" [(ngModel)]="profile.username">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Username">Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="Email" [(ngModel)]="profile.email" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Username">First Name</label>
+                                <input type="text" name="first_name" class="form-control" [(ngModel)]="profile.first_name" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Username">Last Name</label>
+                                <input type="text" name="last_name" [(ngModel)]="profile.last_name" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Username">Phone Number</label>
+                                <input type="number" name="phone_number" [(ngModel)]="profile.phone_number" class="form-control" placeholder="Phone Number">
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Username">City</label>
+                                <input type="text" class="form-control" name="city" [(ngModel)]="profile.city" placeholder="City">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 offset-5">
+                            <div class="form-group">
+                                <button class="btn btn-info rounded-0" (click)="editProfile()">Update Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+        </main>
+    </div>
+</div>

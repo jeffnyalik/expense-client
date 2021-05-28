@@ -31,6 +31,9 @@ export class ExpenseService {
 
   allExpenses(){
     return this.httpClient.get(`${this.BASE_URL}${this.EXPENSE_URL}`)
+    .pipe(tap(() =>{
+      this._refreshPage$.next();
+    }))
   }
 
   singleExpense(id: any): Observable<any>{
@@ -50,12 +53,12 @@ export class ExpenseService {
     return this.httpClient.post(`${this.BASE_URL}${this.EXPENSE_URL}`, model);
   }
 
-  expenseSummary(): Observable<any>{
-    return this.httpClient.get(`${this.BASE_URL}${this.EXPENSE_SUMMARY}`)
-    .pipe(tap(() =>{
-      this._refreshPage$.next();
-    }))
-  }
+  // expenseSummary(): Observable<any>{
+  //   return this.httpClient.get(`${this.BASE_URL}${this.EXPENSE_SUMMARY}`)
+  //   .pipe(tap(() =>{
+  //     this._refreshPage$.next();
+  //   }))
+  // }
 
   //####Income####//
   getIncome(): Observable<any>{

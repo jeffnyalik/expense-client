@@ -35,6 +35,8 @@ import { PasswordResetComponent } from './components/authentication/password-res
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
 import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ChangePasswordComponent } from './components/authentication/change-password/change-password.component';
 
 
 
@@ -57,7 +59,9 @@ import { IncomeDetailComponent } from './components/income/income-detail/income-
     IncomeDetailComponent,
     ConfirmMessageComponent,
     ForgotPasswordComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    ProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Income } from './../../models/income/income';
 import { Router } from '@angular/router';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -17,36 +18,22 @@ Chart.register(...registerables);
 })
 export class IncomeComponent implements OnInit {
  p:any;
- incomeRevenue: any;
+ incomeRevenue: Income[] = [];
  modalRef: BsModalRef;
  loading: boolean = false;
  submitted:boolean = false;
  minDate = "";
  form = new FormGroup({});
- salary:any = []
- business:any = []
- side_hustle:any = []
- others:any = []
  income_chart: any;
  ctx:any;
- amount = 0;
  
- incomeSummary = {
-  "income_data": {
-    "SALARY": {
-      "amount": this.amount
-    },
-    'BUSINESS': {
-      "amount": this.amount
-    },
-    'SIDE_HUSTLE': {
-      "amount": this.amount
-    },
-    'OTHERS': {
-      "amount": this.amount
-    },
-  }
-}
+
+ 
+ salary: Income[] = [];
+ business: Income[] = [];
+ side_hustle: Income[] = [];
+ others: Income[] = [];
+
 
   constructor(
     private income: ExpenseService,
@@ -64,15 +51,7 @@ export class IncomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._getIncome();
-    this._getIncomeSummary();
     this.getDate();
-
-    this.income.incomeRevenue().subscribe(data =>{
-      this.salary.push(data.income_data.SALARY?.amount);
-      this.business.push(data.income_data.BUSINESS?.amount);
-      this.side_hustle.push(data.income_data.SIDE_HUSTLE?.amount);
-      this.others.push(data.income_data.OTHERS?.amount);
-    })
 
      // Chart js configuration
      setTimeout(() => {
@@ -85,10 +64,10 @@ export class IncomeComponent implements OnInit {
         datasets: [
           {
             data: [
-              this.salary,
-              this.business,
-              this.side_hustle,
-              this.others,
+              this.getTotolSalary(),
+              this.getTotolBiz(),
+              this.getTotolSideHustle(),
+              this.getTotolOthers(),
             ],
             backgroundColor: [
                 '#73b4ff',
@@ -132,8 +111,10 @@ export class IncomeComponent implements OnInit {
       console.log(data);
       this.loading = false;
       this.modalRef.hide()
-      this._getIncome();
       this.alerts.success("Added successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }, error=>{
       console.log(error);
       this.alerts.error("An error has occured");
@@ -161,23 +142,92 @@ export class IncomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+
+  private allocateIncome(income: Income){
+    if(income?.source === 'SALARY'){
+      this.salary.push(income);
+    }else if(income?.source === 'BUSINESS'){
+      this.business.push(income);
+    }else if(income?.source === 'SIDE_HUSTLE'){
+      this.side_hustle.push(income);
+    }else{
+      this.others.push(income);
+    }
+  }
+
   private _getIncome(){
-    this.income.getIncome().subscribe((data) =>{
-      this.incomeRevenue = data;
+    this.income.getIncome().subscribe((income: Income[]) =>{
+      this.incomeRevenue = income;
+      this.incomeRevenue.forEach(i => {
+        this.allocateIncome(i);
+        this.modalService.hide();
+    
+      });
       console.log(this.incomeRevenue);
     }, error =>{
       console.log(error);
       this.alerts.error('Error fetching data');
     });
   }
-  
-  private _getIncomeSummary(){
-    this.income.incomeRevenue().subscribe((data) =>{
-      this.incomeSummary = data;
-      console.log(this.incomeSummary);
-    }, error=>{
-      console.log(error)
+
+  getTotolSalary(){
+    let total = 0;
+    this.incomeRevenue.forEach(e =>{
+      if(e.source === 'SALARY'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount;
+        }
+        
+      }
     })
+    return total;
+  }
+  getTotolBiz(){
+    let total  = 0;
+    this.incomeRevenue.forEach(e =>{
+      if(e.source === 'BUSINESS'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount
+        }
+      }
+    })
+    return total;
+  }
+
+  getTotolSideHustle(){
+    let total  = 0;
+    this.incomeRevenue.forEach(e =>{
+      if(e.source === 'SIDE_HUSTLE'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount
+        }
+      }
+    })
+    return total;
+  }
+
+  getTotolOthers(){
+    let total  = 0;
+    this.incomeRevenue.forEach(e =>{
+      if(e.source === 'OTHERS'){
+        const amount = parseFloat(e.amount);
+        if(isNaN(amount)){
+          
+        }else{
+          total+=amount
+        }
+      }
+    })
+    return total;
   }
 
 }

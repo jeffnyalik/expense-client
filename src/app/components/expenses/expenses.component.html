@@ -5,7 +5,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Home</a>
+                        <a [routerLink]="['/expenses']" routerLinkActive="router-link-active">Home</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Overview</li>
                 </ol>
@@ -109,7 +109,7 @@
                         <h4 class="card-header">School Fees</h4>
                         <div class="card-block">
                             <h2 class="text-left">Fees: <span>
-                                {{getTotolFees()}}
+                                {{getTotolFees()|currency}}
                             </span></h2>
 
                         </div>
@@ -120,7 +120,7 @@
                         <h4 class="card-header">House Rent</h4>
                         <div class="card-block">
                             <h2 class="text-left">Rent: <span>
-                                {{getTotolRent()}}
+                                {{getTotolRent()|currency}}
                             </span></h2>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <h4 class="card-header">Household Foods</h4>
                         <div class="card-block">
                             <h2 class="text-left">Food: <span>
-                                {{getTotolFood()}}
+                                {{getTotolFood()|currency}}
                             </span>
                             </h2>
                         </div>
@@ -141,7 +141,7 @@
                         <h4 class="card-header">Other Expenses</h4>
                         <div class="card-block">
                             <h2 class="text-left">Others: <span>
-                                {{getTotolOthers()}}
+                                {{getTotolOthers()|currency}}
                             </span></h2>
                         </div>
                     </div>
@@ -193,7 +193,8 @@
                         <h5 class="card-header">Expense Summary Reports</h5>
                         <div class="card-body">
                             <div class="chart-container">
-                                <canvas id="myChart" width="400" height="400"></canvas>
+                                <canvas id="myChart" width="400" height="400">
+                                </canvas>
                             </div>
                         </div>
                     </div>

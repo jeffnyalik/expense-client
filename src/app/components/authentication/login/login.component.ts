@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
      this.loading = false;
      this.alerts.success('Logged In successfully');
      
-    //  this.router.navigateByUrl(this.returnUrl);
-     this.router.navigate(['/expenses']);
+     this.router.navigateByUrl(this.returnUrl);
+    //  this.router.navigate(['/expenses']);
     //  this.loginSucess = data;
     //  console.log(this.loginSucess.tokens.access);
     //  console.log(data.tokens.refresh);

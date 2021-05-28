@@ -1,3 +1,5 @@
+import { ChangePasswordComponent } from './components/authentication/change-password/change-password.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -27,11 +29,13 @@ import { IncomeDetailComponent } from './components/income/income-detail/income-
   {path: 'expense-detail/:id', component: ExpenseDetailComponent, canActivate: [AuthGuard]},
   {path: 'income', component: IncomeComponent, canActivate: [AuthGuard]},
   {path: 'income-detail/:id', component: IncomeDetailComponent, canActivate: [AuthGuard]},
-  {path:'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'email-verify', component: EmailVerifyComponent},
   {path: 'password-reset-form', component: ForgotPasswordComponent},
   {path: 'password-reset', component: PasswordResetComponent},
+  {path: 'password-change', component: ChangePasswordComponent, canActivate: [AuthGuard]},
+  {path: 'user-profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found', pathMatch: 'full'}
 ];

@@ -9,11 +9,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Chart, registerables} from 'chart.js';
 
+import { ExpenseSummary } from 'src/app/models/summary/expense';
+
 import { AlertifyService } from './../../services/alertify.service';
 import { Expense } from './../../models/expense/expense';
 import { AuthService } from './../../services/auth/auth.service';
 import { ExpenseService } from './../../services/expense/expense.service';
-import { ExpenseSummary } from 'src/app/models/summary/expense';
 
 Chart.register(...registerables);
 
@@ -27,7 +28,6 @@ export class ExpensesComponent implements OnInit {
   id: any;
   minDate = "";
   ctx:any;
-  expenseSummary;
   form = new FormGroup({});
   loading: boolean = false;
   submited: boolean = false;
@@ -35,19 +35,13 @@ export class ExpensesComponent implements OnInit {
   modalRef: BsModalRef;
   category_data:any
   jwtHelper = new JwtHelperService();
-  expense_chart:any;
+  expense_chart;
 
 
-  datas:  Expense[] = []
+  fees:   Expense[] = []
   rent:   Expense[] = []
   food:   Expense[] = []
   others: Expense[] = []
-  
-  feeSummary: ExpenseSummary[] = [];
-  rentSummary: ExpenseSummary[] = [];
-  foodSummary: ExpenseSummary[] = [];
-  othersSummary: ExpenseSummary[] = [];
-
 
   constructor(private exServices: ExpenseService,
     private router: Router,
@@ -71,20 +65,10 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getExpenses();
-    this.getAllExpenseSummary();
-    // this.expense.refreshNeeded$.subscribe(res =>{
-    //   this.getAllExpenseSummary();
-    // })
     this.getDate();
-    // this.expense.expenseSummary().subscribe(data =>{
-    //   this.datas.push(data.FEES.amount);
-    //   this.rent.push(data.RENT.amount);
-    //   this.food.push(data.FOOD.amount);
-    //   this.others.push(data.OTHERS.amount);
-    // })
-      // this.datas.push(data.category_data.FEES.amount)})
     // Chart js configuration
     setTimeout(() => {
+    
       this.ctx = document.getElementById('myChart');
       this.expense_chart = new Chart(this.ctx, {
       type: 'pie',
@@ -94,7 +78,7 @@ export class ExpensesComponent implements OnInit {
         datasets: [
           {
             data: [
-              this.datas,
+              this.getTotolFees(),
               this.getTotolRent(),
               this.getTotolFood(),
               this.getTotolOthers(),
@@ -119,10 +103,10 @@ export class ExpensesComponent implements OnInit {
             }
         }
     }
-      
-     
+
   });
-    }, 1000);
+
+    }, 1000);;
     // end 
   }
 
@@ -226,6 +210,7 @@ export class ExpensesComponent implements OnInit {
       this.expenses.forEach(e =>{
        this.allocateExpense(e);
       })
+
     }, error => console.log(error))
   }
 
@@ -234,12 +219,10 @@ export class ExpensesComponent implements OnInit {
       this.food.push(expense);
     }else if(expense?.category === 'RENT'){
       this.rent.push(expense);
-
     }else if(expense?.category === 'FEES'){
-      this.datas.push(expense);
+      this.fees.push(expense);
     }else{
       this.others.push(expense);
-
     }
   }
 
@@ -259,7 +242,11 @@ export class ExpensesComponent implements OnInit {
     this.form.reset();
     this.loading = false
     this.modalService.hide();
-    // this.getExpenses();
+    
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
   }, error=>{
     console.log(error);
   });
@@ -273,17 +260,4 @@ expenseInfo(){
   })
 }
 
-private getAllExpenseSummary(){
-  this.expense.expenseSummary().subscribe((summary: ExpenseSummary[]) =>{
-    this.expenseSummary = summary;
-    console.log(this.expenseSummary);
-  }, error =>{
-    console.log(error);
-  })
 }
-  
-}
-function foods(foods: any) {
-  throw new Error('Function not implemented.');
-}
-
