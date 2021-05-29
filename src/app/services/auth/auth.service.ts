@@ -11,9 +11,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AlertifyService } from './../alertify.service';
 import { environment } from './../../../environments/environment';
 import { Profile } from './../../models/profile/profile';
-import { error } from '@angular/compiler/src/util';
-
-
 
 
 @Injectable({
@@ -30,6 +27,7 @@ public VERIFY_EMAIL = 'auth/email-verify';
 public PASSWORD_RESET_CONFIRM = 'auth/request-reset-email/';
 public PASSWORD_RESET = 'auth/password-reset';
 public PASSWORD_RESET_CHANGE = 'auth/password-change/';
+public CHANGE_USER_PASSWORD = 'auth/change-user-password/';
 public UPDATE_USER_PROFILE = 'auth/update-profile/';
 
 
@@ -148,6 +146,10 @@ public UPDATE_USER_PROFILE = 'auth/update-profile/';
 
   updateUserProfile(profile: Profile[]): Observable<Profile[]>{
     return this.httpClient.put<Profile[]>(`${this.BASE_URL}${this.UPDATE_USER_PROFILE}`, profile)
+  }
+
+  changeUserPassword(form:any){
+    return this.httpClient.put(`${this.BASE_URL}${this.CHANGE_USER_PASSWORD}`, form)
   }
   
 }

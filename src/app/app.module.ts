@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -28,16 +29,15 @@ import { HomeComponent } from './components/home/home.component';
 import { IncomeComponent } from './components/income/income.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { AuthService } from './services/auth/auth.service';
+import { ChangePasswordComponent } from './components/authentication/change-password/change-password.component';
 import { ForgotPasswordComponent } from './components/authentication/forgot-password/forgot-password.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { PasswordResetComponent } from './components/authentication/password-reset/password-reset.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
 import { ExpenseDetailComponent } from './components/expenses/expense-detail/expense-detail.component';
 import { IncomeDetailComponent } from './components/income/income-detail/income-detail.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ChangePasswordComponent } from './components/authentication/change-password/change-password.component';
-
 
 
 
@@ -72,6 +72,7 @@ import { ChangePasswordComponent } from './components/authentication/change-pass
     BrowserAnimationsModule,
     NgxPaginationModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),

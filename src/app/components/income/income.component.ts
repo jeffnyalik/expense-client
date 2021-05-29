@@ -1,4 +1,3 @@
-import { Income } from './../../models/income/income';
 import { Router } from '@angular/router';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -7,9 +6,11 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Chart, registerables} from 'chart.js';
 
+import * as XLSX from 'xlsx'; 
+
 import { AlertifyService } from './../../services/alertify.service';
+import { Income } from './../../models/income/income';
 import { ExpenseService } from './../../services/expense/expense.service';
-Chart.register(...registerables);
 
 @Component({
   selector: 'app-income',
@@ -26,9 +27,8 @@ export class IncomeComponent implements OnInit {
  form = new FormGroup({});
  income_chart: any;
  ctx:any;
- 
+ fileName= 'ExcelSheet.xlsx';
 
- 
  salary: Income[] = [];
  business: Income[] = [];
  side_hustle: Income[] = [];
@@ -229,5 +229,20 @@ export class IncomeComponent implements OnInit {
     })
     return total;
   }
+
+  exportexcel()
+    {
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
 
 }

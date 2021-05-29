@@ -28,10 +28,7 @@ export class LoginComponent implements OnInit {
      private alerts: AlertifyService,
      private route: ActivatedRoute
      ) { 
-      const currentLog = localStorage.getItem('loginStatus');
-      if(currentLog == '1'){
-        router.navigate(['/']);
-      }
+      
      }
 
   ngOnInit(): void {
@@ -39,9 +36,14 @@ export class LoginComponent implements OnInit {
       'email': ['', [Validators.required, Validators.email, Validators.minLength(6)]],
       'password': ['', [Validators.required, Validators.minLength(6)]]
     });
+    
 
+    const currentLog = localStorage.getItem('loginStatus');
+      if(currentLog == '1'){
+        this.router.navigate(['/expenses']);
+      }
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/expenses';
   }
 
   get f(){

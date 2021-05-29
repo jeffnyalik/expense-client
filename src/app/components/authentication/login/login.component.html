@@ -1,60 +1,62 @@
-<section class="login">
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center ">
-            <div class="col-xs-12 col-sm-8 col-md-5 col-sm-offset-2 col-md-offset-4 ">
-                <div class="card rounded-0" style="border-color:#128c7e">
-                    <div class="card-header">
-                        <h2 class="card-title text-center">Login to your Account</h2>
-                    </div>
-                    <div class="card-body">
-                        <form role="form" [formGroup]="form" autocomplete="off" (ngSubmit)="login()">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="username">Email Address</label>
-                                        <input type="text" class="form-control" formControlName="email" placeholder="Email address" input-lg>
-                                        <label *ngIf="f.email.touched && f.email.invalid" class="text-danger">
-                                            <span *ngIf="f.email.errors">Email is required.</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="username">Password</label>
-                                        <input type="password" class="form-control" formControlName="password" placeholder="Enter password" input-sm>
-                                        <span class="text-danger" *ngIf="loginError">{{loginError.error.detail}}</span>
-
-                                        <div *ngIf="f.password.touched && f.password.invalid ">
-                                            <label *ngIf=" f.password.errors" class="text-danger">Password must be atleast 6 characters.</label>
-                                            <label *ngIf="f.password.errors && !f.password.errors" class="text-warning">
-                                                Password should contain atleast 6 characters
+<body><br><br><br><br><br>
+    <section class="login">
+        <div class="container">
+            <div class="row d-flex justify-content-center ">
+                <div class="col-xs-12 col-sm-8 col-md-5 col-sm-offset-2 col-md-offset-4 ">
+                    <div class="card rounded-0" style="border-color:#128c7e">
+                        <div class="card-header text-center">
+                            <h2 class="card-title text-center">Login to your Account</h2>
+                        </div>
+                        <div class="card-body">
+                            <form role="form" [formGroup]="form" autocomplete="off" (ngSubmit)="login()">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="username">Email Address</label>
+                                            <input type="text" class="form-control" formControlName="email" placeholder="Email address" input-lg>
+                                            <label *ngIf="f.email.touched && f.email.invalid" class="text-danger">
+                                                <span *ngIf="f.email.errors">Email is required.</span>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-                            </div>
-                            <button type="submit" [disabled]="!form.valid" class="btn btn-info btn-block rounded-0">
-                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> Login
-                            </button>
-                            <br>
-                            <div class="text-center col-xs-6">
-                                <span>
-                                    Don't have an account?  <a [routerLink]="[ '/register'] " style="color: blue; ">Register here.</a>
-                                </span>
-                            </div>
-                            <div class="text-center col-xs-6">
-                                <span>
-                                    Forgot Password?  <a [routerLink]="[ '/password-reset-form'] " style="color: blue; ">Click here.</a>
-                                </span>
-                            </div>
-                        </form>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="username">Password</label>
+                                            <input type="password" class="form-control" formControlName="password" placeholder="Enter password" input-sm>
+                                            <span class="text-danger" *ngIf="loginError">{{loginError.error.detail}}</span>
+
+                                            <div *ngIf="f.password.touched && f.password.invalid ">
+                                                <label *ngIf=" f.password.errors" class="text-danger">Password must be atleast 6 characters.</label>
+                                                <label *ngIf="f.password.errors && !f.password.errors" class="text-warning">
+                                                    Password should contain atleast 6 characters
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button type="submit" [disabled]="!form.valid" class="btn btn-info btn-block rounded-0">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> Login
+                                </button>
+                                <br>
+                                <div class="text-center col-xs-6">
+                                    <span>
+                                        Don't have an account?  <a [routerLink]="[ '/register'] " style="color: blue; ">Register here.</a>
+                                    </span>
+                                </div>
+                                <div class="text-center col-xs-6">
+                                    <span>
+                                        Forgot Password?  <a [routerLink]="[ '/password-reset-form'] " style="color: blue; ">Click here.</a>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</body>

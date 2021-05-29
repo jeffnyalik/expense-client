@@ -5,9 +5,9 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a [routerLink]="['/expenses']" routerLinkActive="router-link-active">Home</a>
+                        <a [routerLink]="['/expenses']" routerLinkActive="router-link-active" style="color: #fff;">Home</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                    <li class="breadcrumb-item active" aria-current="page" style="color: #fff;">Overview</li>
                 </ol>
             </nav>
 
@@ -154,19 +154,27 @@
                 <div class="col-12 col-xl-8 mb-4 mb-lg-0">
                     <div class="card">
                         <h5 class="card-header">Latest Expenditure</h5>
+                        <div class="text-right mr-4">
+                            <!-- <span class="pdf mr-2">
+                                <button class="btn btn-info btn-sm rounded-0" >Export pdf</button>
+                            </span> -->
+                            <a class="excel" style="cursor:pointer" (click)="exportexcel()">
+                                <button class="btn btn-warning btn-sm rounded-0">Export to Excel</button>
+                            </a>
+                        </div>
                         <div class="card-body" style="font-family:'Times New Roman', Times, serif;font-size:medium;" *ngIf="expenses">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
+                            <div class="table-responsive" id="htmlData">
+                                <table class="table table-striped" id="excel-table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Category</th>
                                             <th scope="col">Amount</th>
                                             <th scope="col">Date</th>
-
+                                            <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 4, currentPage: p}">
+                                        <tr *ngFor="let item of expenses | paginate: {itemsPerPage: 6, currentPage: p}">
                                             <td>{{item.category | titlecase}}</td>
                                             <td>{{item.amount | currency }}</td>
                                             <td>{{item.date | date}}</td>

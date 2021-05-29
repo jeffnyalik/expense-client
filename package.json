@@ -28,11 +28,13 @@
     "bootswatch": "^4.6.0",
     "bulma": "^0.9.2",
     "chart.js": "^3.2.1",
+    "file-saver": "^2.0.5",
     "ngx-bootstrap": "^6.2.0",
     "ngx-pagination": "^5.1.0",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.7",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
