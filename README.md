@@ -1,4 +1,4 @@
-# ExpenseApi
+# Expense Client Side
 
 This Expense App is developed using using Angular v11 and Django REST API,
 it tracks and Manages your Expenses and income on a day to day basis.
