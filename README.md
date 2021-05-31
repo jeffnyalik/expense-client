@@ -1,27 +1,28 @@
-# ExpenseClient
+# ExpenseApi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+This Expense App is developed using using Angular v11 and Django REST API,
+it tracks and Manages your Expenses and income on a day to day basis.
+
+## Features and tools of the App
+
+1. Full Authentication with jWT tokens
+2. Password Reset functionality via email
+3. User change password
+4. Edit user profile.
+5. Email confirmation with tokens
+6. Charts
+7. Export to Excel
+8. Alerts etc.
+
+## Modules
+
+1. Expense
+2. Income
+3. Authentication
+
+## Links
+Django REST API Github  link (https://github.com/jeffnyalik/expenseApi)
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-### Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+(https://expenseapp-client.herokuapp.com). The frontend app is built using Angular v11
